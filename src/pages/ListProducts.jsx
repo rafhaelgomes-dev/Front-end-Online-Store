@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { Redirect } from 'react-router-dom';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
+import Category from '../components/Category';
 
 export default class ListProducts extends Component {
   constructor() {
@@ -8,7 +10,14 @@ export default class ListProducts extends Component {
       listProducts: [],
       inputSearch: '',
       button: false,
+      listCategories: [],
+      redirect: false,
     };
+  }
+
+  componentDidMount = async () => {
+    const categories = await getCategories();
+    this.setState({ listCategories: categories });
   }
 
   handleChange = ({ target }) => {
@@ -24,8 +33,14 @@ export default class ListProducts extends Component {
     this.setState({ listProducts: fetchApi.results, button: true });
   }
 
+  redirectShoppingCart() {
+    this.setState({
+      redirect: true,
+    });
+  }
+
   render() {
-    const { listProducts, inputSearch, button } = this.state;
+    const { listProducts, inputSearch, button, listCategories, redirect } = this.state;
     return (
       <div>
         <input
@@ -65,6 +80,24 @@ export default class ListProducts extends Component {
             ))
           )
         }
+        <div>
+          <h2>Categorias</h2>
+          {listCategories.map(({ id, name }) => (
+            <Category
+              key={ id }
+              btnName={ name }
+            />
+          ))}
+        </div>
+
+        <button
+          data-testid="shopping-cart-button"
+          type="button"
+          onClick={ () => this.redirectShoppingCart() }
+        >
+          Carrinho de compras
+        </button>
+        {redirect ? <Redirect to="/shoppingcart" /> : null}
       </div>
     );
   }
