@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Category from '../components/Category';
 import { getCategories } from '../services/api';
 
@@ -8,6 +9,7 @@ export default class ListProducts extends Component {
     this.state = {
       listProducts: [],
       listCategories: [],
+      redirect: false,
     };
   }
 
@@ -16,8 +18,14 @@ export default class ListProducts extends Component {
     this.setState({ listCategories: categories });
   }
 
+  redirectShoppingCart() {
+    this.setState({
+      redirect: true,
+    });
+  }
+
   render() {
-    const { listProducts, listCategories } = this.state;
+    const { redirect, listProducts, listCategories } = this.state;
     return (
       <div>
         <h1>Lista de Produtos</h1>
@@ -38,6 +46,15 @@ export default class ListProducts extends Component {
             />
           ))}
         </div>
+
+        <button
+          data-testid="shopping-cart-button"
+          type="button"
+          onClick={ () => this.redirectShoppingCart() }
+        >
+          Carrinho de compras
+        </button>
+        {redirect ? <Redirect to="/shoppingcart" /> : null}
       </div>
     );
   }
