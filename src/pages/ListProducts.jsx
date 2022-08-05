@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 export default class ListProducts extends Component {
-  constructor(props) {
-    super(props);
-    state = {
+  constructor() {
+    super();
+    this.state = {
       listProducts: [],
     };
   }
