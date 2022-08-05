@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 
 export default class Category extends Component {
   render() {
-    const { btnName } = this.props;
+    const { btnName, onClick } = this.props;
     return (
       <div>
         <label htmlFor="btnCategory">
-          <button data-testid="category" type="submit" id="btnCategory">{btnName}</button>
+          <button
+            data-testid="category"
+            type="submit"
+            id="btnCategory"
+            onClick={ onClick }
+          >
+            {btnName}
+          </button>
         </label>
       </div>
     );
@@ -16,4 +23,5 @@ export default class Category extends Component {
 
 Category.propTypes = {
   btnName: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };

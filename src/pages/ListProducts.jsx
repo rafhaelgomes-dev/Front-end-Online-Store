@@ -33,6 +33,11 @@ export default class ListProducts extends Component {
     this.setState({ listProducts: fetchApi.results, button: true });
   }
 
+  handleSearchButtonCategory = async (id) => {
+    const fetchApi = await getProductsFromCategoryAndQuery(id, undefined);
+    this.setState({ listProducts: fetchApi.results, button: true });
+  }
+
   redirectShoppingCart() {
     this.setState({
       redirect: true,
@@ -86,6 +91,7 @@ export default class ListProducts extends Component {
             <Category
               key={ id }
               btnName={ name }
+              onClick={ () => this.handleSearchButtonCategory(id) }
             />
           ))}
         </div>
