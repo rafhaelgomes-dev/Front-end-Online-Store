@@ -47,6 +47,7 @@ export default class ListProducts extends Component {
 
   render() {
     const { listProducts, inputSearch, button, listCategories, redirect } = this.state;
+    console.log(listProducts);
     return (
       <div>
         <input
@@ -74,10 +75,16 @@ export default class ListProducts extends Component {
         }
         {
           button && (
-            listProducts.map((listProduct) => (
-              <CardProduct key={ listProduct.id } listProduct={ listProduct } />
+            listProducts.map((listProduct, index) => (
+
+              <CardProduct
+                key={ listProduct.id }
+                listProduct={ listProduct }
+                index={ index }
+              />
             ))
           )
+
         }
         <div>
           <h2>Categorias</h2>
