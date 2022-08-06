@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import Category from '../components/Category';
+import CardProduct from '../components/CardProduct';
 
 export default class ListProducts extends Component {
   constructor() {
@@ -74,14 +75,7 @@ export default class ListProducts extends Component {
         {
           button && (
             listProducts.map((listProduct) => (
-              <div key={ listProduct.id } data-testid="product">
-                <p>{listProduct.title}</p>
-                <img
-                  src={ listProduct.thumbnail }
-                  alt={ listProduct.id }
-                />
-                <p>{`preço: R$ ${listProduct.price}`}</p>
-              </div>
+              <CardProduct key={ listProduct.id } listProduct={ listProduct } />
             ))
           )
         }
