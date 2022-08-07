@@ -51,7 +51,7 @@ class ProductDetails extends React.Component {
           type="button"
           onClick={ () => getPropsOfChildrens(listProducts) }
         >
-          Adicionar ao Carrinho de compras
+          Adicionar produto ao Carrinho de compras
         </button>
         {redirect ? <Redirect to="/shoppingcart" /> : null}
       </div>
