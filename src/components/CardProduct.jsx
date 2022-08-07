@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default class CardProduct extends React.Component {
   render() {
-    const { listProduct } = this.props;
+    const { listProduct, getPropsOfChildrens } = this.props;
     return (
       <div data-testid="product">
         <p>{listProduct.title}</p>
@@ -19,11 +19,19 @@ export default class CardProduct extends React.Component {
         >
           Detalhes do produto
         </Link>
+        <button
+          data-testid="product-add-to-cart"
+          type="button"
+          onClick={ () => getPropsOfChildrens(listProduct) }
+        >
+          Carrinho de compras
+        </button>
       </div>
     );
   }
 }
 
 CardProduct.propTypes = {
-  listProduct: PropTypes.objectOf.isRequired,
+  listProduct: PropTypes.shape.isRequired,
+  getPropsOfChildrens: PropTypes.func.isRequired,
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import Category from '../components/Category';
 import CardProduct from '../components/CardProduct';
@@ -47,7 +48,7 @@ export default class ListProducts extends Component {
 
   render() {
     const { listProducts, inputSearch, button, listCategories, redirect } = this.state;
-    console.log(listProducts);
+    const { getPropsOfChildrens } = this.props;
     return (
       <div>
         <input
@@ -81,6 +82,7 @@ export default class ListProducts extends Component {
                 key={ listProduct.id }
                 listProduct={ listProduct }
                 index={ index }
+                getPropsOfChildrens={ getPropsOfChildrens }
               />
             ))
           )
@@ -109,3 +111,7 @@ export default class ListProducts extends Component {
     );
   }
 }
+
+ListProducts.propTypes = {
+  getPropsOfChildrens: PropTypes.func.isRequired,
+};
