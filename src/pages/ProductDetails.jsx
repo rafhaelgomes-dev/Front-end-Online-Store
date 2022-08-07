@@ -27,6 +27,7 @@ class ProductDetails extends React.Component {
   render() {
     /*  const { match: { params: { id } } } = this.props; */
     const { listProducts, redirect } = this.state;
+    const { getPropsOfChildrens } = this.props;
     return (
       <div data-testid="product-detail-link">
         <p data-testid="product-detail-name">{listProducts.title}</p>
@@ -45,6 +46,13 @@ class ProductDetails extends React.Component {
         >
           Carrinho de compras
         </button>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => getPropsOfChildrens(listProducts) }
+        >
+          Adicionar ao Carrinho de compras
+        </button>
         {redirect ? <Redirect to="/shoppingcart" /> : null}
       </div>
     );
@@ -57,6 +65,7 @@ ProductDetails.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  getPropsOfChildrens: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;
