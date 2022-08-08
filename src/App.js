@@ -15,6 +15,11 @@ class App extends React.Component {
       { listItemsAdd: [...preventState.listItemsAdd, param] }));
   }
 
+  getPropsOfChildrensDelete= (param) => {
+    this.setState(() => (
+      { listItemsAdd: [...param] }));
+  }
+
   render() {
     const { listItemsAdd } = this.state;
     return (
@@ -31,7 +36,11 @@ class App extends React.Component {
             <Route
               exact
               path="/shoppingcart"
-              render={ () => <Shoppingcart listItemsAdd={ listItemsAdd } /> }
+              render={ () => (<Shoppingcart
+                listItemsAdd={ listItemsAdd }
+                getPropsOfChildrens={ this.getPropsOfChildrens }
+                getPropsOfChildrensDelete={ this.getPropsOfChildrensDelete }
+              />) }
             />
             <Route
               exact

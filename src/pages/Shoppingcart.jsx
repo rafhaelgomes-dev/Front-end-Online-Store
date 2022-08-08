@@ -6,8 +6,7 @@ export default class Shoppingcart extends React.Component {
     super();
     this.state = {
       shoppingCartList: [],
-      productsArray: [],
-      buttonDisable: false,
+      // buttonDisable: [],
     };
   }
 
@@ -18,41 +17,42 @@ export default class Shoppingcart extends React.Component {
      listAddState = () => {
        const { listItemsAdd } = this.props;
        this.setState({
-         productsArray: [...listItemsAdd],
          shoppingCartList: [...listItemsAdd],
        });
      }
 
     totalProducts = (id) => {
-      const { productsArray } = this.state;
-      const arrayFilter = productsArray.filter((e) => e.id === id);
+      const { listItemsAdd } = this.props;
+      const newArray = [...listItemsAdd];
+      const arrayFilter = newArray.filter((e) => e.id === id);
       return arrayFilter.length;
     };
 
     addNewProducts = (produt) => {
       this.setState((preventState) => (
-        { productsArray: [...preventState.productsArray, produt] }));
+        { shoppingCartList: [...preventState.shoppingCartList, produt] }));
     }
 
-    removeAddProducts = (id) => {
-      const { productsArray } = this.state;
-      const newArray = [...productsArray];
-      console.log(newArray);
-      for (let index = 0; index < newArray.length; index += 1) {
-        if (productsArray[index].id === id) {
-          newArray.splice(index, 1);
-          // console.log(newArray);
-        }
-        this.setState(
-          { productsArray: [...newArray] },
-        );
-        break;
-      }
-    }
+    // removeAddProducts = (id) => {
+    //   const { listItemsAdd } = this.props;
+    //   const { getPropsOfChildrensDelete } = this.props;
+    //   const newArray = [...listItemsAdd];
+    //   for (let index = 0; index < newArray.length; index += 1) {
+    //     if (listItemsAdd[index].id === id) {
+    //       newArray.splice(index, 1);
+    //       const filter = newArray.filter((e) => e.id === id);
+    //       if (filter.length <= 0) {
+    //         return;
+    //       }
+    //       getPropsOfChildrensDelete(newArray);
+    //       return;
+    //     }
+    //   }
+    // }
 
     render() {
-      const { listItemsAdd } = this.props;
-      const { shoppingCartList, buttonDisable } = this.state;
+      const { listItemsAdd, getPropsOfChildrens } = this.props;
+      // const { buttonDisable } = this.state;
 
       return (
         <div>
@@ -64,7 +64,7 @@ export default class Shoppingcart extends React.Component {
                 lista de Produtos
               </p>
               {
-                shoppingCartList
+                listItemsAdd
                   .map((listItemAdd, i) => (
                     <div key={ listItemAdd.id + i }>
                       <p data-testid="shopping-cart-product-name">{listItemAdd.title}</p>
@@ -73,22 +73,17 @@ export default class Shoppingcart extends React.Component {
                         alt={ listItemAdd.id }
                       />
                       <p>{`preço: R$ ${listItemAdd.price}`}</p>
-                      <p>
-                        Total:
-                        {' '}
-                        {this.totalProducts(listItemAdd.id)}
-                      </p>
                       <button
+                        data-testid="product-increase-quantity"
                         type="button"
-                        onClick={ () => this
-                          .addNewProducts(listItemAdd) }
+                        onClick={ () => getPropsOfChildrens(listItemAdd) }
                       >
                         ADD+
                         {' '}
-
                       </button>
-                      <button
-                        disabled={ buttonDisable }
+                      {/* <button
+                        data-testid="product-decrease-quantity"
+                        disabled={ buttonDisable[i] }
                         type="button"
                         onClick={ () => this.removeAddProducts(listItemAdd.id) }
                       >
@@ -96,7 +91,7 @@ export default class Shoppingcart extends React.Component {
                         REMOVE-
                         {' '}
 
-                      </button>
+                      </button> */}
                     </div>
                   ))
               }
@@ -116,4 +111,6 @@ Shoppingcart.propTypes = {
     map: PropTypes.func.isRequired,
     length: PropTypes.func.isRequired,
   }).isRequired,
+  getPropsOfChildrens: PropTypes.func.isRequired,
+  // getPropsOfChildrensDelete: PropTypes.func.isRequired,
 };
