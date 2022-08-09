@@ -91,7 +91,6 @@ class ProductDetails extends React.Component {
       message,
       errorMsg,
       listComments,
-      rating,
     } = this.state;
     const { getPropsOfChildrens } = this.props;
 
@@ -165,14 +164,14 @@ class ProductDetails extends React.Component {
               Enviar
             </button>
           </form>
-          {errorMsg ? <p data-testid="error-msg">{errorMsg}</p> : ''}
+          {errorMsg && <p data-testid="error-msg">{errorMsg}</p> }
         </div>
         {listComments.map((comment, index) => (
           <Comment
             key={ comment.email + index }
             email={ comment.email }
             message={ comment.message }
-            rating={ rating }
+            rating={ comment.rating }
           />
         ))}
       </div>
