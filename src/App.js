@@ -13,6 +13,10 @@ class App extends React.Component {
   getPropsOfChildrens= (param) => {
     this.setState((preventState) => (
       { listItemsAdd: [...preventState.listItemsAdd, param] }));
+    const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+ ?? [];
+    dataBase.push(param);
+    localStorage.setItem('db_shoppingcart', JSON.stringify(dataBase));
   }
 
   getPropsOfChildrensDelete= (param) => {

@@ -17,15 +17,17 @@ export default class Shoppingcart extends React.Component {
   }
 
      listAddState = () => {
-       const { listItemsAdd } = this.props;
+       const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+      ?? [];
        this.setState({
-         shoppingCartList: [...listItemsAdd],
+         shoppingCartList: [...dataBase],
        });
      }
 
     teste = () => {
-      const { listItemsAdd } = this.props;
-      const newArray = [...listItemsAdd];
+      const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+      ?? [];
+      const newArray = [...dataBase];
       newArray.forEach(() => {
         this.setState((preventState) => (
           { produtosNumeros: [...preventState.produtosNumeros, 1] }));
@@ -59,13 +61,15 @@ export default class Shoppingcart extends React.Component {
     }
 
     removerProduto = (i) => {
-      const { shoppingCartList } = this.state;
+      const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+      ?? [];
       // const { getPropsOfChildrensDelete } = this.props;
-      const newArray = [...shoppingCartList];
+      const newArray = [...dataBase];
       if (newArray.length <= 1) {
         return;
       }
       newArray.splice(i, 1);
+      localStorage.setItem('db_shoppingcart', JSON.stringify(newArray));
       this.setState({
         shoppingCartList: [...newArray],
       });
@@ -74,7 +78,8 @@ export default class Shoppingcart extends React.Component {
     render() {
       // const { listItemsAdd } = this.props;
       const { buttonDisable, produtosNumeros, shoppingCartList } = this.state;
-
+      // const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+      // ?? [];
       return (
         <div>
           {shoppingCartList.length === 0 ? (
@@ -120,7 +125,7 @@ export default class Shoppingcart extends React.Component {
                       <button
                         data-testid="remove-product"
                         onClick={ () => this.removerProduto(i) }
-                        type="button"
+                        type="submit"
                       >
                         Remover Produto
                       </button>
