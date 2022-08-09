@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import Checkout from './pages/Checkout';
 import ListProducts from './pages/ListProducts';
 import ProductDetails from './pages/ProductDetails';
 import Shoppingcart from './pages/Shoppingcart';
@@ -53,6 +54,11 @@ class App extends React.Component {
                 { ...props }
                 getPropsOfChildrens={ this.getPropsOfChildrens }
               />) }
+            />
+            <Route
+              exact
+              path="/checkout"
+              component={ Checkout }
             />
           </Switch>
         </BrowserRouter>
