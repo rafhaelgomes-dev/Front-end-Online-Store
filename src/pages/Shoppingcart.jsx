@@ -59,22 +59,27 @@ export default class Shoppingcart extends React.Component {
     }
 
     removerProduto = (i) => {
-      const { listItemsAdd } = this.props;
-      const { getPropsOfChildrensDelete } = this.props;
-      const newArray = [...listItemsAdd];
+      const { shoppingCartList } = this.state;
+      // const { getPropsOfChildrensDelete } = this.props;
+      const newArray = [...shoppingCartList];
+      if (newArray.length <= 1) {
+        return;
+      }
       newArray.splice(i, 1);
-      getPropsOfChildrensDelete(newArray);
+      this.setState({
+        shoppingCartList: [...newArray],
+      });
     }
 
     render() {
-      const { listItemsAdd } = this.props;
-      const { buttonDisable, produtosNumeros } = this.state;
+      // const { listItemsAdd } = this.props;
+      const { buttonDisable, produtosNumeros, shoppingCartList } = this.state;
 
       return (
         <div>
-          {listItemsAdd.length === 0 ? (
+          {shoppingCartList.length === 0 ? (
             <div>
-              <p data-testid="shopping-cart-empty-message">Seu carrinho está  vazio</p>
+              <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
             </div>
           ) : (
             <div>
@@ -82,7 +87,7 @@ export default class Shoppingcart extends React.Component {
                 lista de Produtos
               </p>
               {
-                listItemsAdd
+                shoppingCartList
                   .map((listItemAdd, i) => (
                     <div key={ listItemAdd.id + i }>
                       <p data-testid="shopping-cart-product-name">{listItemAdd.title}</p>
@@ -137,5 +142,5 @@ Shoppingcart.propTypes = {
     map: PropTypes.func.isRequired,
     length: PropTypes.func.isRequired,
   }).isRequired,
-  getPropsOfChildrensDelete: PropTypes.func.isRequired,
+  // getPropsOfChildrensDelete: PropTypes.func.isRequired,
 };
