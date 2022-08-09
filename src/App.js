@@ -13,6 +13,15 @@ class App extends React.Component {
   getPropsOfChildrens= (param) => {
     this.setState((preventState) => (
       { listItemsAdd: [...preventState.listItemsAdd, param] }));
+    const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+ ?? [];
+    dataBase.push(param);
+    localStorage.setItem('db_shoppingcart', JSON.stringify(dataBase));
+  }
+
+  getPropsOfChildrensDelete= (param) => {
+    this.setState(() => (
+      { listItemsAdd: [...param] }));
   }
 
   render() {
@@ -31,7 +40,11 @@ class App extends React.Component {
             <Route
               exact
               path="/shoppingcart"
-              render={ () => <Shoppingcart listItemsAdd={ listItemsAdd } /> }
+              render={ () => (<Shoppingcart
+                listItemsAdd={ listItemsAdd }
+                getPropsOfChildrens={ this.getPropsOfChildrens }
+                getPropsOfChildrensDelete={ this.getPropsOfChildrensDelete }
+              />) }
             />
             <Route
               exact
