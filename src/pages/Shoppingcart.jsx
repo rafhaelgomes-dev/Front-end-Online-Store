@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default class Shoppingcart extends React.Component {
   constructor() {
@@ -13,7 +14,7 @@ export default class Shoppingcart extends React.Component {
 
   componentDidMount() {
     this.listAddState();
-    this.teste();
+    this.getDbShoppingCartLocalStorage();
   }
 
      listAddState = () => {
@@ -24,7 +25,7 @@ export default class Shoppingcart extends React.Component {
        });
      }
 
-    teste = () => {
+    getDbShoppingCartLocalStorage = () => {
       const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
       ?? [];
       const newArray = [...dataBase];
@@ -65,7 +66,7 @@ export default class Shoppingcart extends React.Component {
       ?? [];
       // const { getPropsOfChildrensDelete } = this.props;
       const newArray = [...dataBase];
-      if (newArray.length <= 1) {
+      if (newArray.length < 1) {
         return;
       }
       newArray.splice(i, 1);
@@ -132,6 +133,8 @@ export default class Shoppingcart extends React.Component {
               }
             </div>
           )}
+          {shoppingCartList.length > 0
+          && <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>}
         </div>
       );
     }
@@ -142,5 +145,4 @@ Shoppingcart.propTypes = {
     map: PropTypes.func.isRequired,
     length: PropTypes.func.isRequired,
   }).isRequired,
-  // getPropsOfChildrensDelete: PropTypes.func.isRequired,
 };
