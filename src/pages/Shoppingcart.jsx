@@ -101,11 +101,6 @@ export default class Shoppingcart extends React.Component {
                         alt={ listItemAdd.id }
                       />
                       <p>{`preço: R$ ${listItemAdd.price}`}</p>
-                      <p>
-                        Total:
-                        {' '}
-                        {produtosNumeros[i]}
-                      </p>
                       <button
                         data-testid="product-increase-quantity"
                         type="button"
