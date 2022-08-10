@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import Category from '../components/Category';
 import CardProduct from '../components/CardProduct';
+import QuantOfProductsCart from '../components/QuantOfProductsCart';
 
 export default class ListProducts extends Component {
   constructor() {
@@ -14,12 +15,16 @@ export default class ListProducts extends Component {
       button: false,
       listCategories: [],
       redirect: false,
+      // quantidadeDeProdutos: [],
     };
   }
 
   componentDidMount = async () => {
     const categories = await getCategories();
     this.setState({ listCategories: categories });
+    // const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+    // ?? [];
+    // this.setState({ quantidadeDeProdutos: [...dataBase] });
   }
 
   handleChange = ({ target }) => {
@@ -48,7 +53,9 @@ export default class ListProducts extends Component {
 
   render() {
     const { listProducts, inputSearch, button, listCategories, redirect } = this.state;
-    const { getPropsOfChildrens } = this.props;
+    // const { quantidadeDeProdutos } = this.state;
+    const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
+    console.log(listItemsAdd);
     return (
       <div>
         <input
@@ -105,6 +112,11 @@ export default class ListProducts extends Component {
           onClick={ () => this.redirectShoppingCart() }
         >
           Carrinho de compras
+          <QuantOfProductsCart
+            data-testid="shopping-cart-size"
+            quantidade2={ quantidade2 }
+            quantidade={ listItemsAdd }
+          />
         </button>
         {redirect ? <Redirect to="/shoppingcart" /> : null}
       </div>
@@ -114,4 +126,6 @@ export default class ListProducts extends Component {
 
 ListProducts.propTypes = {
   getPropsOfChildrens: PropTypes.func.isRequired,
+  listItemsAdd: PropTypes.arrayOf.isRequired,
+  quantidade2: PropTypes.arrayOf.isRequired,
 };
