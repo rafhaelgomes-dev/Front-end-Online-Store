@@ -49,7 +49,7 @@ export default class Shoppingcart extends React.Component {
         { shoppingCartList: [...preventState.shoppingCartList, produt] }));
     }
 
-    removeAddProducts = (id) => 
+    removeAddProducts = (id) => {
       const { produtosNumeros } = this.state;
       const newArray = [...produtosNumeros];
       if (newArray[id] <= 1) {
@@ -75,7 +75,7 @@ export default class Shoppingcart extends React.Component {
         shoppingCartList: [...newArray],
       });
     }
-    
+
     render() {
       // const { listItemsAdd } = this.props;
       const { buttonDisable, produtosNumeros, shoppingCartList } = this.state;
@@ -114,9 +114,7 @@ export default class Shoppingcart extends React.Component {
                       </button>
                       <button
                         data-testid="product-decrease-quantity"
-                        
                         disabled={ buttonDisable[i] }
-
                         type="button"
                         onClick={ () => this.removeAddProducts(i) }
                       >
