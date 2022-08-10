@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductID } from '../services/api';
 import Comment from '../components/Comment';
+import QuantOfProductsCart from '../components/QuantOfProductsCart';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -92,7 +93,7 @@ class ProductDetails extends React.Component {
       errorMsg,
       listComments,
     } = this.state;
-    const { getPropsOfChildrens } = this.props;
+    const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
 
     return (
       <div data-testid="product-detail-link">
@@ -111,6 +112,11 @@ class ProductDetails extends React.Component {
           onClick={ () => this.redirectShoppingCart() }
         >
           Carrinho de compras
+          <QuantOfProductsCart
+            data-testid="shopping-cart-size"
+            quantidade2={ quantidade2 }
+            quantidade={ listItemsAdd }
+          />
         </button>
         <button
           data-testid="product-detail-add-to-cart"
@@ -186,6 +192,8 @@ ProductDetails.propTypes = {
     }).isRequired,
   }).isRequired,
   getPropsOfChildrens: PropTypes.func.isRequired,
+  listItemsAdd: PropTypes.arrayOf.isRequired,
+  quantidade2: PropTypes.arrayOf.isRequired,
 };
 
 export default ProductDetails;

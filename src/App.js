@@ -9,6 +9,7 @@ import Shoppingcart from './pages/Shoppingcart';
 class App extends React.Component {
   state = {
     listItemsAdd: [],
+    quantidade2: [],
   }
 
   getPropsOfChildrens= (param) => {
@@ -18,6 +19,8 @@ class App extends React.Component {
  ?? [];
     dataBase.push(param);
     localStorage.setItem('db_shoppingcart', JSON.stringify(dataBase));
+    this.setState(() => (
+      { quantidade2: [...dataBase] }));
   }
 
   getPropsOfChildrensDelete= (param) => {
@@ -26,7 +29,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { listItemsAdd } = this.state;
+    const { listItemsAdd, quantidade2 } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -35,6 +38,8 @@ class App extends React.Component {
               exact
               path="/"
               render={ () => (<ListProducts
+                quantidade2={ quantidade2 }
+                listItemsAdd={ listItemsAdd }
                 getPropsOfChildrens={ this.getPropsOfChildrens }
               />) }
             />
@@ -52,6 +57,8 @@ class App extends React.Component {
               path="/productDetails/:id"
               render={ (props) => (<ProductDetails
                 { ...props }
+                quantidade2={ quantidade2 }
+                listItemsAdd={ listItemsAdd }
                 getPropsOfChildrens={ this.getPropsOfChildrens }
               />) }
             />
