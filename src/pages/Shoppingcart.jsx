@@ -105,6 +105,8 @@ export default class Shoppingcart extends React.Component {
                       <button
                         data-testid="product-increase-quantity"
                         type="button"
+                        disabled={ produtosNumeros.some((maxQuanty) => (
+                          maxQuanty >= listItemAdd.available_quantity)) }
                         onClick={ () => this
                           .totalProducts(i) }
                       >
