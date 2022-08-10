@@ -12,6 +12,8 @@ export default class CardProduct extends React.Component {
           src={ listProduct.thumbnail }
           alt={ listProduct.id }
         />
+        {listProduct.shipping.free_shipping
+        && <p data-testid="free-shipping"><strong>FRETE GRATIS GALERA!!!!</strong></p>}
         <p>{`preço: R$ ${listProduct.price}`}</p>
         <Link
           data-testid="product-detail-link"
@@ -26,6 +28,7 @@ export default class CardProduct extends React.Component {
         >
           Carrinho de compras
         </button>
+
       </div>
     );
   }

@@ -37,22 +37,24 @@ export default class Shoppingcart extends React.Component {
     removeAddProducts = (id) => {
       const { productsArray } = this.state;
       const newArray = [...productsArray];
-      console.log(newArray);
       for (let index = 0; index < newArray.length; index += 1) {
         if (productsArray[index].id === id) {
           newArray.splice(index, 1);
-          // console.log(newArray);
+          const filterArry = newArray.filter((e) => e.id === id);
+          if (filterArry.length <= 0) {
+            return;
+          }
+          this.setState(
+            { productsArray: [...newArray] },
+          );
+          return;
         }
-        this.setState(
-          { productsArray: [...newArray] },
-        );
-        break;
       }
     }
 
     render() {
       const { listItemsAdd } = this.props;
-      const { shoppingCartList, buttonDisable } = this.state;
+      const { shoppingCartList, buttonDisable, productsArray } = this.state;
 
       return (
         <div>
@@ -73,12 +75,14 @@ export default class Shoppingcart extends React.Component {
                         alt={ listItemAdd.id }
                       />
                       <p>{`preço: R$ ${listItemAdd.price}`}</p>
+
                       <p>
                         Total:
                         {' '}
                         {this.totalProducts(listItemAdd.id)}
                       </p>
                       <button
+                        data-testid="product-increase-quantity"
                         type="button"
                         onClick={ () => this
                           .addNewProducts(listItemAdd) }
@@ -88,6 +92,7 @@ export default class Shoppingcart extends React.Component {
 
                       </button>
                       <button
+                        data-testid="product-decrease-quantity"
                         disabled={ buttonDisable }
                         type="button"
                         onClick={ () => this.removeAddProducts(listItemAdd.id) }
@@ -101,9 +106,8 @@ export default class Shoppingcart extends React.Component {
                   ))
               }
               <p data-testid="shopping-cart-product-quantity">
-                {`quantidade: ${listItemsAdd.length}`}
+                {`${productsArray.length}`}
               </p>
-
             </div>
           )}
         </div>
