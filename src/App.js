@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import Checkout from './pages/Checkout';
 import ListProducts from './pages/ListProducts';
 import ProductDetails from './pages/ProductDetails';
 import Shoppingcart from './pages/Shoppingcart';
@@ -13,6 +14,15 @@ class App extends React.Component {
   getPropsOfChildrens= (param) => {
     this.setState((preventState) => (
       { listItemsAdd: [...preventState.listItemsAdd, param] }));
+    const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
+ ?? [];
+    dataBase.push(param);
+    localStorage.setItem('db_shoppingcart', JSON.stringify(dataBase));
+  }
+
+  getPropsOfChildrensDelete= (param) => {
+    this.setState(() => (
+      { listItemsAdd: [...param] }));
   }
 
   render() {
@@ -31,7 +41,11 @@ class App extends React.Component {
             <Route
               exact
               path="/shoppingcart"
-              render={ () => <Shoppingcart listItemsAdd={ listItemsAdd } /> }
+              render={ () => (<Shoppingcart
+                listItemsAdd={ listItemsAdd }
+                getPropsOfChildrens={ this.getPropsOfChildrens }
+                getPropsOfChildrensDelete={ this.getPropsOfChildrensDelete }
+              />) }
             />
             <Route
               exact
@@ -40,6 +54,11 @@ class App extends React.Component {
                 { ...props }
                 getPropsOfChildrens={ this.getPropsOfChildrens }
               />) }
+            />
+            <Route
+              exact
+              path="/checkout"
+              component={ Checkout }
             />
           </Switch>
         </BrowserRouter>

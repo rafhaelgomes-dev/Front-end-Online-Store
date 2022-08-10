@@ -26,7 +26,7 @@ export default class CardProduct extends React.Component {
           type="button"
           onClick={ () => getPropsOfChildrens(listProduct) }
         >
-          Carrinho de compras
+          Adiciona ao Carrinho
         </button>
 
       </div>
@@ -35,6 +35,10 @@ export default class CardProduct extends React.Component {
 }
 
 CardProduct.propTypes = {
-  listProduct: PropTypes.shape.isRequired,
+  listProduct: PropTypes.arrayOf(PropTypes.object.isRequired),
   getPropsOfChildrens: PropTypes.func.isRequired,
+};
+
+CardProduct.defaultProps = {
+  listProduct: [],
 };
