@@ -57,35 +57,7 @@ export default class ListProducts extends Component {
       <div className="listProduct">
         <header className="header">
           <h3>Front-end Online Store</h3>
-          <div className="FormPesquisa">
-            <div className="divform">
-              <input
-                name="inputSearch"
-                className="inputSearch"
-                value={ inputSearch }
-                onChange={ this.handleChange }
-                placeholder="Pesquisar"
-                data-testid="query-input"
-                type="text"
-              />
-              <button
-                type="button"
-                className="buttonSearch"
-                data-testid="query-button"
-                onClick={ this.handleSearchButton }
-              >
-                Pesquisar
-              </button>
-            </div>
-            {
-              !button
-                ? (
-                  <p data-testid="home-initial-message">
-                    Digite algum termo de pesquisa ou escolha uma categoria.
-                  </p>
-                ) : !listProducts.length && <p>Nenhum produto foi encontrado</p>
-            }
-          </div>
+          <div className="FormPesquisa" />
           <button
             className="buttonCarrinho"
             data-testid="shopping-cart-button"
@@ -100,6 +72,33 @@ export default class ListProducts extends Component {
             />
           </button>
         </header>
+        <div className="divform">
+          <input
+            name="inputSearch"
+            className="inputSearch"
+            value={ inputSearch }
+            onChange={ this.handleChange }
+            placeholder="Pesquisar"
+            data-testid="query-input"
+            type="text"
+          />
+          <button
+            type="button"
+            className="buttonSearch"
+            data-testid="query-button"
+            onClick={ this.handleSearchButton }
+          >
+            Pesquisar
+          </button>
+          {
+            !button
+              ? (
+                <p data-testid="home-initial-message">
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+                </p>
+              ) : !listProducts.length && <p>Nenhum produto foi encontrado</p>
+          }
+        </div>
         <div className="sectionMain">
           <div className="categorias">
             <h2>Categorias</h2>

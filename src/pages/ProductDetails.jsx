@@ -96,90 +96,97 @@ class ProductDetails extends React.Component {
     const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
 
     return (
-      <div data-testid="product-detail-link">
-        <p data-testid="product-detail-name">{listProducts.title}</p>
-        <img data-testid="product-detail-image" src={ listProducts.thumbnail } alt="" />
-        <p data-testid="product-detail-price">{`R$ ${listProducts.price}`}</p>
-        <p>
-          Especificações Técnicas
-        </p>
-        <ul>
-          <li> especificação 1</li>
-        </ul>
-        <button
-          data-testid="shopping-cart-button"
-          type="button"
-          onClick={ () => this.redirectShoppingCart() }
-        >
-          Carrinho de compras
-          <QuantOfProductsCart
-            data-testid="shopping-cart-size"
-            quantidade2={ quantidade2 }
-            quantidade={ listItemsAdd }
-          />
-        </button>
-        <button
-          data-testid="product-detail-add-to-cart"
-          type="button"
-          onClick={ () => getPropsOfChildrens(listProducts) }
-        >
-          Adicionar produto ao Carrinho de compras
-        </button>
-        {redirect ? <Redirect to="/shoppingcart" /> : null}
-
-        <div>
-          <form>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              data-testid="product-detail-email"
-              onChange={ (e) => this.handleChangeForm(e) }
-              value={ email }
-              required
+      <div>
+        <header className="header">
+          <h3>Front-end Online Store</h3>
+          <div className="FormPesquisa" />
+          <button
+            className="buttonCarrinho"
+            data-testid="shopping-cart-button"
+            type="button"
+            onClick={ () => this.redirectShoppingCart() }
+          >
+            Carrinho de compras
+            <QuantOfProductsCart
+              data-testid="shopping-cart-size"
+              quantidade2={ quantidade2 }
+              quantidade={ listItemsAdd }
             />
-            <div>
-              {evaluationValues.map((value) => (
-                <button
-                  key={ value }
-                  type="button"
-                  onClick={ (e) => this.handleClickBtnEvaluation(e) }
-                  data-testid={ `${value}-rating` }
-                  value={ value }
-                >
-                  {value}
-                </button>))}
+          </button>
+        </header>
+        <div data-testid="product-detail-link">
+          <p data-testid="product-detail-name">{listProducts.title}</p>
+          <img data-testid="product-detail-image" src={ listProducts.thumbnail } alt="" />
+          <p data-testid="product-detail-price">{`R$ ${listProducts.price}`}</p>
+          <p>
+            Especificações Técnicas
+          </p>
+          <ul>
+            <li> especificação 1</li>
+          </ul>
+          <button
+            data-testid="product-detail-add-to-cart"
+            type="button"
+            onClick={ () => getPropsOfChildrens(listProducts) }
+          >
+            Adicionar produto ao Carrinho de compras
+          </button>
+          {redirect ? <Redirect to="/shoppingcart" /> : null}
 
-            </div>
-            <textarea
-              name="message"
-              id="message"
-              cols="30"
-              rows="10"
-              placeholder="Mensagem (Opcional"
-              data-testid="product-detail-evaluation"
-              onChange={ (e) => this.handleChangeForm(e) }
-              value={ message }
+          <div>
+            <form>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                data-testid="product-detail-email"
+                onChange={ (e) => this.handleChangeForm(e) }
+                value={ email }
+                required
+              />
+              <div>
+                {evaluationValues.map((value) => (
+                  <button
+                    key={ value }
+                    type="button"
+                    onClick={ (e) => this.handleClickBtnEvaluation(e) }
+                    data-testid={ `${value}-rating` }
+                    value={ value }
+                  >
+                    {value}
+                  </button>))}
+
+              </div>
+              <textarea
+                name="message"
+                id="message"
+                cols="30"
+                rows="10"
+                placeholder="Mensagem (Opcional"
+                data-testid="product-detail-evaluation"
+                onChange={ (e) => this.handleChangeForm(e) }
+                value={ message }
+              />
+              <button
+                type="submit"
+                data-testid="submit-review-btn"
+                onClick={ (e) => this.handleClickForm(e) }
+              >
+                Enviar
+              </button>
+            </form>
+            {errorMsg && <p data-testid="error-msg">{errorMsg}</p> }
+          </div>
+          {listComments.map((comment, index) => (
+            <Comment
+              key={ comment.email + index }
+              email={ comment.email }
+              message={ comment.message }
+              rating={ comment.rating }
             />
-            <button
-              type="submit"
-              data-testid="submit-review-btn"
-              onClick={ (e) => this.handleClickForm(e) }
-            >
-              Enviar
-            </button>
-          </form>
-          {errorMsg && <p data-testid="error-msg">{errorMsg}</p> }
+          ))}
         </div>
-        {listComments.map((comment, index) => (
-          <Comment
-            key={ comment.email + index }
-            email={ comment.email }
-            message={ comment.message }
-            rating={ comment.rating }
-          />
-        ))}
       </div>
     );
   }
