@@ -32,7 +32,7 @@ class App extends React.Component {
     const { listItemsAdd, quantidade2 } = this.state;
     return (
       <div className="App">
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename={ process.env.PUBLIC_URL }>
           <Switch>
             <Route
               exact
