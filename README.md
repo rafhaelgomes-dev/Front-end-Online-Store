@@ -12,11 +12,17 @@ Rafhael Gomes, Vinicius Soares, Pedro Igor, Rodrigo Gonçalves e Marcelo Ferreir
 
 # Alguns dos requisitos que fiquei responsável e tive participação:
 [Req. 01] - Implemente o módulo que acessa a API do Mercado Livre
+<hr></hr>
 [Req. 03] - Criar o botão de carrinho de compras na tela principal
+<hr></hr>
 [Req. 06] - Ao selecionar uma categoria, mostrar somente os produtos referentes a ela
+<hr></hr>
 [Req. 07] - Redirecione para uma tela com a exibição detalhada do um produto clicado
+<hr></hr>
 [Req. 09] - Permitir adicionar o produto ao carrinho a partir da tela de exibição detalhada
+<hr></hr>
 [Req. 10] - Na página do Carrinho, mostrar a lista de produtos adicionados, o valor total e permitir a manipulação da sua quantidade
+<hr></hr>
 [Req. 13] - Em todas as telas com o ícone do carrinho, adicionar um número com a quantidade de produtos adicionados
 
 <hr></hr>
