@@ -57,67 +57,81 @@ export default class ListProducts extends Component {
     const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
     console.log(listItemsAdd);
     return (
-      <div>
-        <input
-          name="inputSearch"
-          value={ inputSearch }
-          onChange={ this.handleChange }
-          placeholder="pesquisa"
-          data-testid="query-input"
-          type="text"
-        />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.handleSearchButton }
-        >
-          pesquisar
-        </button>
-        {
-          !button
-            ? (
-              <p data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </p>
-            ) : !listProducts.length && <p>Nenhum produto foi encontrado</p>
-        }
-        {
-          button && (
-            listProducts.map((listProduct, index) => (
-
-              <CardProduct
-                key={ listProduct.id }
-                listProduct={ listProduct }
-                index={ index }
-                getPropsOfChildrens={ getPropsOfChildrens }
+      <div className="listProduct">
+        <header className="header">
+          <h3>Front-end Online Store</h3>
+          <div className="FormPesquisa">
+            <div className="divform">
+              <input
+                name="inputSearch"
+                className="inputSearch"
+                value={ inputSearch }
+                onChange={ this.handleChange }
+                placeholder="Pesquisar"
+                data-testid="query-input"
+                type="text"
               />
-            ))
-          )
-
-        }
-        <div>
-          <h2>Categorias</h2>
-          {listCategories.map(({ id, name }) => (
-            <Category
-              key={ id }
-              btnName={ name }
-              onClick={ () => this.handleSearchButtonCategory(id) }
+              <button
+                type="button"
+                className="buttonSearch"
+                data-testid="query-button"
+                onClick={ this.handleSearchButton }
+              >
+                Pesquisar
+              </button>
+            </div>
+            {
+              !button
+                ? (
+                  <p data-testid="home-initial-message">
+                    Digite algum termo de pesquisa ou escolha uma categoria.
+                  </p>
+                ) : !listProducts.length && <p>Nenhum produto foi encontrado</p>
+            }
+          </div>
+          <button
+            className="buttonCarrinho"
+            data-testid="shopping-cart-button"
+            type="button"
+            onClick={ () => this.redirectShoppingCart() }
+          >
+            Carrinho de compras
+            <QuantOfProductsCart
+              data-testid="shopping-cart-size"
+              quantidade2={ quantidade2 }
+              quantidade={ listItemsAdd }
             />
-          ))}
-        </div>
+          </button>
+        </header>
+        <div className="sectionMain">
+          <div className="categorias">
+            <h2>Categorias</h2>
+            {listCategories.map(({ id, name }) => (
+              <Category
+                key={ id }
+                btnName={ name }
+                onClick={ () => this.handleSearchButtonCategory(id) }
+              />
+            ))}
+          </div>
+          {
+            button && (
+              <div className="divDosProdutos">
+                {
+                  listProducts.map((listProduct, index) => (
+                    <CardProduct
+                      key={ listProduct.id }
+                      listProduct={ listProduct }
+                      index={ index }
+                      getPropsOfChildrens={ getPropsOfChildrens }
+                    />
+                  ))
+                }
+              </div>
+            )
 
-        <button
-          data-testid="shopping-cart-button"
-          type="button"
-          onClick={ () => this.redirectShoppingCart() }
-        >
-          Carrinho de compras
-          <QuantOfProductsCart
-            data-testid="shopping-cart-size"
-            quantidade2={ quantidade2 }
-            quantidade={ listItemsAdd }
-          />
-        </button>
+          }
+        </div>
         {redirect ? <Redirect to="/shoppingcart" /> : null}
       </div>
     );

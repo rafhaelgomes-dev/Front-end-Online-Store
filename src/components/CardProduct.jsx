@@ -6,14 +6,14 @@ export default class CardProduct extends React.Component {
   render() {
     const { listProduct, getPropsOfChildrens } = this.props;
     return (
-      <div data-testid="product">
+      <div className="cardProduct">
         <p>{listProduct.title}</p>
         <img
           src={ listProduct.thumbnail }
           alt={ listProduct.id }
         />
         {listProduct.shipping.free_shipping
-        && <p data-testid="free-shipping"><strong>FRETE GRATIS GALERA!!!!</strong></p>}
+        && <p data-testid="free-shipping"><strong>FRETE GRATIS</strong></p>}
         <p>{`preço: R$ ${listProduct.price}`}</p>
         <Link
           data-testid="product-detail-link"
@@ -22,6 +22,7 @@ export default class CardProduct extends React.Component {
           Detalhes do produto
         </Link>
         <button
+          className="buttonAddCart"
           data-testid="product-add-to-cart"
           type="button"
           onClick={ () => getPropsOfChildrens(listProduct) }

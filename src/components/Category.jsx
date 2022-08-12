@@ -9,6 +9,7 @@ export default class Category extends Component {
         <label htmlFor="btnCategory">
           <button
             data-testid="category"
+            className="buttonCategory"
             type="submit"
             id="btnCategory"
             onClick={ onClick }
