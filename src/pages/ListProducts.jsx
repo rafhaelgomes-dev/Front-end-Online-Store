@@ -22,9 +22,7 @@ export default class ListProducts extends Component {
   componentDidMount = async () => {
     const categories = await getCategories();
     this.setState({ listCategories: categories });
-    // const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
-    // ?? [];
-    // this.setState({ quantidadeDeProdutos: [...dataBase] });
+    this.handleSearchButtonCategory('MLB5726', undefined);
   }
 
   handleChange = ({ target }) => {
@@ -55,7 +53,6 @@ export default class ListProducts extends Component {
     const { listProducts, inputSearch, button, listCategories, redirect } = this.state;
     // const { quantidadeDeProdutos } = this.state;
     const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
-    console.log(listItemsAdd);
     return (
       <div className="listProduct">
         <header className="header">

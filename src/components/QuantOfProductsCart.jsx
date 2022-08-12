@@ -17,9 +17,8 @@ export default class QuantOfProductsCart extends React.Component {
   }
 
   render() {
-    const { quantidade, quantidade2 } = this.props;
+    const { quantidade2 } = this.props;
     const { quantidadeCarrinho } = this.state;
-    console.log(quantidade);
     return (
       <div>
         <span data-testid="shopping-cart-size">
@@ -34,6 +33,5 @@ export default class QuantOfProductsCart extends React.Component {
 }
 
 QuantOfProductsCart.propTypes = {
-  quantidade: PropTypes.arrayOf.isRequired,
   quantidade2: PropTypes.arrayOf.isRequired,
 };
