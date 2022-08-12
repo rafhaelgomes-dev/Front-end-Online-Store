@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class Shoppingcart extends React.Component {
   constructor() {
@@ -9,6 +9,7 @@ export default class Shoppingcart extends React.Component {
       shoppingCartList: [],
       buttonDisable: [],
       produtosNumeros: [],
+      paginaInicial: false,
     };
   }
 
@@ -22,6 +23,12 @@ export default class Shoppingcart extends React.Component {
       ?? [];
        this.setState({
          shoppingCartList: [...dataBase],
+       });
+     }
+
+     redirectPaginaInicial = () => {
+       this.setState({
+         paginaInicial: true,
        });
      }
 
@@ -78,65 +85,94 @@ export default class Shoppingcart extends React.Component {
 
     render() {
       // const { listItemsAdd } = this.props;
-      const { buttonDisable, produtosNumeros, shoppingCartList } = this.state;
+      const { buttonDisable, produtosNumeros,
+        shoppingCartList, paginaInicial } = this.state;
       // const dataBase = JSON.parse(localStorage.getItem('db_shoppingcart'))
       // ?? [];
       return (
         <div>
+          <header className="header">
+            <h3>Front-end Online Store</h3>
+            <div className="FormPesquisa" />
+            <button
+              className="buttonCarrinho"
+              data-testid="shopping-cart-button"
+              type="button"
+              onClick={ () => this.redirectPaginaInicial() }
+            >
+              Página Inicial
+            </button>
+          </header>
+          {paginaInicial ? <Redirect to="/" /> : null}
           {shoppingCartList.length === 0 ? (
             <div>
               <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
             </div>
           ) : (
-            <div>
-              <p>
-                lista de Produtos
-              </p>
-              {
-                shoppingCartList
-                  .map((listItemAdd, i) => (
-                    <div key={ listItemAdd.id + i }>
-                      <p data-testid="shopping-cart-product-name">{listItemAdd.title}</p>
-                      <img
-                        src={ listItemAdd.thumbnail }
-                        alt={ listItemAdd.id }
-                      />
-                      <p>{`preço: R$ ${listItemAdd.price}`}</p>
-                      <button
-                        data-testid="product-increase-quantity"
-                        type="button"
-                        disabled={ produtosNumeros.some((maxQuanty) => (
-                          maxQuanty >= listItemAdd.available_quantity)) }
-                        onClick={ () => this
-                          .totalProducts(i) }
-                      >
-                        +
-                      </button>
-                      <button
-                        data-testid="product-decrease-quantity"
-                        disabled={ buttonDisable[i] }
-                        type="button"
-                        onClick={ () => this.removeAddProducts(i) }
-                      >
-                        -
-                      </button>
-                      <button
-                        data-testid="remove-product"
-                        onClick={ () => this.removerProduto(i) }
-                        type="submit"
-                      >
-                        Remover Produto
-                      </button>
-                      <p data-testid="shopping-cart-product-quantity">
-                        {`quantidade: ${produtosNumeros[i]}`}
-                      </p>
-                    </div>
-                  ))
-              }
-            </div>
+            <main className="shoppingCart">
+              <div>
+                {' '}
+                <p className="pListadeProdutos">
+                  Meu Carrinho de compras
+                </p>
+
+              </div>
+              <div className="produtosShoppingCart">
+                {
+                  shoppingCartList
+                    .map((listItemAdd, i) => (
+                      <div key={ listItemAdd.id + i } className="CardProductShoppingCart">
+                        <p
+                          data-testid="shopping-cart-product-name"
+                        >
+                          {listItemAdd.title}
+
+                        </p>
+                        <img
+                          src={ listItemAdd.thumbnail }
+                          alt={ listItemAdd.id }
+                        />
+                        <p>{`preço: R$ ${listItemAdd.price}`}</p>
+                        <div>
+                          <button
+                            data-testid="product-increase-quantity"
+                            type="button"
+                            disabled={ produtosNumeros.some((maxQuanty) => (
+                              maxQuanty >= listItemAdd.available_quantity)) }
+                            onClick={ () => this
+                              .totalProducts(i) }
+                          >
+                            +
+                          </button>
+                          <button
+                            data-testid="product-decrease-quantity"
+                            disabled={ buttonDisable[i] }
+                            type="button"
+                            onClick={ () => this.removeAddProducts(i) }
+                          >
+                            -
+                          </button>
+                        </div>
+                        <button
+                          data-testid="remove-product"
+                          onClick={ () => this.removerProduto(i) }
+                          type="submit"
+                        >
+                          Remover Produto
+                        </button>
+                        <p data-testid="shopping-cart-product-quantity">
+                          {`quantidade: ${produtosNumeros[i]}`}
+                        </p>
+                      </div>
+                    ))
+                }
+              </div>
+              <div className="buttonFinalizarCompra">
+                {shoppingCartList.length > 0
+          && <Link className="checkout-products" to="/checkout">Finalizar Compra</Link>}
+              </div>
+            </main>
           )}
-          {shoppingCartList.length > 0
-          && <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>}
         </div>
       );
     }

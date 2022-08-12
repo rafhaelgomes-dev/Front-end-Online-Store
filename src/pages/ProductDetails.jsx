@@ -18,6 +18,7 @@ class ProductDetails extends React.Component {
       message: '',
       errorMsg: '',
       listComments: [],
+      paginaInicial: false,
     };
   }
 
@@ -76,6 +77,12 @@ class ProductDetails extends React.Component {
     return isValidEmail && isValidRating;
   }
 
+  redirectPaginaInicial = () => {
+    this.setState({
+      paginaInicial: true,
+    });
+  }
+
   redirectShoppingCart() {
     this.setState({
       redirect: true,
@@ -92,6 +99,7 @@ class ProductDetails extends React.Component {
       message,
       errorMsg,
       listComments,
+      paginaInicial,
     } = this.state;
     const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
 
@@ -100,30 +108,35 @@ class ProductDetails extends React.Component {
         <header className="header">
           <h3>Front-end Online Store</h3>
           <div className="FormPesquisa" />
-          <button
-            className="buttonCarrinho"
-            data-testid="shopping-cart-button"
-            type="button"
-            onClick={ () => this.redirectShoppingCart() }
-          >
-            Carrinho de compras
-            <QuantOfProductsCart
-              data-testid="shopping-cart-size"
-              quantidade2={ quantidade2 }
-              quantidade={ listItemsAdd }
-            />
-          </button>
+          <div className="botoesHeader">
+            <button
+              className="buttonCarrinho"
+              data-testid="shopping-cart-button"
+              type="button"
+              onClick={ () => this.redirectPaginaInicial() }
+            >
+              Página Inicial
+            </button>
+            <button
+              className="buttonCarrinho"
+              data-testid="shopping-cart-button"
+              type="button"
+              onClick={ () => this.redirectShoppingCart() }
+            >
+              Carrinho de compras
+              <QuantOfProductsCart
+                data-testid="shopping-cart-size"
+                quantidade2={ quantidade2 }
+                quantidade={ listItemsAdd }
+              />
+            </button>
+          </div>
+          {paginaInicial ? <Redirect to="/" /> : null}
         </header>
-        <div data-testid="product-detail-link">
+        <div className="product-detail-link">
           <p data-testid="product-detail-name">{listProducts.title}</p>
           <img data-testid="product-detail-image" src={ listProducts.thumbnail } alt="" />
           <p data-testid="product-detail-price">{`R$ ${listProducts.price}`}</p>
-          <p>
-            Especificações Técnicas
-          </p>
-          <ul>
-            <li> especificação 1</li>
-          </ul>
           <button
             data-testid="product-detail-add-to-cart"
             type="button"
