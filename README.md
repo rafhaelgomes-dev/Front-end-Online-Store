@@ -1,7 +1,7 @@
 # Projeto Front-end Online Store
 
 Front-end online store - Ecommerce 
-Projeto desenvolvido com um time de 6 pessoas na Trybe com o objetivo de construir o front-end  de um ecommerce alimentada por uma api do mercado livre (ainda estamos estilizando o projeto para publicá-lo). O objetivo foi sedimentar tudo o que aprendemos de React  até o bloco do projeto, enquanto praticamos a organização de um projeto em time com a metodologia agile Kanban.
+Projeto desenvolvido com um time de 6 pessoas na Trybe com o objetivo de construir o front-end  de um ecommerce alimentada por uma api do mercado livre. O objetivo foi sedimentar tudo o que aprendemos de React  até o bloco do projeto, enquanto praticamos a organização de um projeto em time com a metodologia agile Kanban.
 
 <hr></hr>
 
