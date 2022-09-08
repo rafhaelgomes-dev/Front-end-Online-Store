@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from './Category.module.css';
 
 export default class Category extends Component {
   render() {
     const { btnName, onClick } = this.props;
     return (
       <div>
-        <label htmlFor="btnCategory">
-          <button
-            data-testid="category"
-            className="buttonCategory"
-            type="submit"
-            id="btnCategory"
-            onClick={ onClick }
-          >
-            {btnName}
-          </button>
-        </label>
+        <button
+          data-testid="category"
+          className={ styles.buttonCategory }
+          type="submit"
+          id="btnCategory"
+          onClick={ onClick }
+        >
+          {btnName}
+        </button>
       </div>
     );
   }

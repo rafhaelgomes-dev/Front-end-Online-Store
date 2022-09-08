@@ -1,0 +1,10 @@
+.buttonCategory {
+  background-color: white;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.buttonCategory:hover {
+  color: #003BE5;
+  font-weight: bold;
+}

@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.listProduct {
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background-color: #003BE5;
+  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.inputSearch {
+  background-color: white;
+  height: 35px;
+  width: 200px;
+  border: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.buttonSearch {
+  background-color: white;
+  border: none;
+  height: 35px;
+  width: 38px;
+  border-left: 1px solid rgb(183, 183, 183);
+}
+
+.imgLupa {
+  width: 12px;
+}
+
+.sectionMain {
+  display: flex;
+  background-color: #E1E5EB;
+}
+
+.categorias {
+  background-color: white;
+  width: 300px;
+  text-align: center;
+}
+
+.divDosProdutos {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 300px);
+  justify-content: center;
+}
+
+.categorias h2 {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.borda {
+  width: 200px;
+  height: 1px;
+  background-color: black;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.pDigiteAlgumTermo {
+  width: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.pDigiteAlgumTermo h1 {
+  color: #31C28D;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pDigiteAlgumTermo p {
+  color: #94979D;
+  text-align: center;
+}

@@ -5,6 +5,9 @@ import { getProductsFromCategoryAndQuery, getCategories } from '../services/api'
 import Category from '../components/Category';
 import CardProduct from '../components/CardProduct';
 import QuantOfProductsCart from '../components/QuantOfProductsCart';
+import styles from './ListProduct.module.css';
+import Lupa from '../assets/Vector.png';
+import Logo from '../assets/logo.png';
 
 export default class ListProducts extends Component {
   constructor() {
@@ -22,7 +25,7 @@ export default class ListProducts extends Component {
   componentDidMount = async () => {
     const categories = await getCategories();
     this.setState({ listCategories: categories });
-    this.handleSearchButtonCategory('MLB5726', undefined);
+    // this.handleSearchButtonCategory('MLB5726', undefined);
   }
 
   handleChange = ({ target }) => {
@@ -54,37 +57,29 @@ export default class ListProducts extends Component {
     // const { quantidadeDeProdutos } = this.state;
     const { getPropsOfChildrens, listItemsAdd, quantidade2 } = this.props;
     return (
-      <div className="listProduct">
-        <header className="header">
-          <h3>Front-end Online Store</h3>
-          <div className="FormPesquisa">
-            <div className="divform">
-              <input
-                name="inputSearch"
-                className="inputSearch"
-                value={ inputSearch }
-                onChange={ this.handleChange }
-                placeholder="Pesquisar"
-                data-testid="query-input"
-                type="text"
-              />
-              <button
-                type="button"
-                className="buttonSearch"
-                data-testid="query-button"
-                onClick={ this.handleSearchButton }
-              >
-                Pesquisar
-              </button>
-            </div>
-            {
-              !button
-                ? (
-                  <p data-testid="home-initial-message">
-                    Digite algum termo de pesquisa ou escolha uma categoria.
-                  </p>
-                ) : !listProducts.length && <p>Nenhum produto foi encontrado</p>
-            }
+      <div className={ styles.listProduct }>
+        <header className={ styles.header }>
+          <div className="divform">
+            <input
+              name="inputSearch"
+              className={ styles.inputSearch }
+              value={ inputSearch }
+              onChange={ this.handleChange }
+              placeholder="Pesquisar"
+              data-testid="query-input"
+              type="text"
+            />
+            <button
+              type="button"
+              className={ styles.buttonSearch }
+              data-testid="query-button"
+              onClick={ this.handleSearchButton }
+            >
+              <img src={ Lupa } alt="botão de pesquisar" className={ styles.imgLupa } />
+            </button>
+          </div>
+          <div className={ styles.logo }>
+            <img src={ Logo } alt="logo front end online store" />
           </div>
           <button
             className="buttonCarrinho"
@@ -100,9 +95,10 @@ export default class ListProducts extends Component {
             />
           </button>
         </header>
-        <div className="sectionMain">
-          <div className="categorias">
+        <div className={ styles.sectionMain }>
+          <div className={ styles.categorias }>
             <h2>Categorias</h2>
+            <div className={ styles.borda } />
             {listCategories.map(({ id, name }) => (
               <Category
                 key={ id }
@@ -112,8 +108,25 @@ export default class ListProducts extends Component {
             ))}
           </div>
           {
+            !button
+              ? (
+                <div className={ styles.pDigiteAlgumTermo }>
+                  <h1>
+                    Você ainda não
+                    <br />
+                    realizou uma busca
+                  </h1>
+                  <p>
+                    Digite algum termo de pesquisa ou
+                    <br />
+                    escolha uma categoria.
+                  </p>
+                </div>
+              ) : !listProducts.length && <p>Nenhum produto foi encontrado</p>
+          }
+          {
             button && (
-              <div className="divDosProdutos">
+              <div className={ styles.divDosProdutos }>
                 {
                   listProducts.map((listProduct, index) => (
                     <CardProduct

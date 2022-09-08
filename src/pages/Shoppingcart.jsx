@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
+import Styles from './Shoppingcart.module.css';
 
 export default class Shoppingcart extends React.Component {
   constructor() {

@@ -1,0 +1,26 @@
+.cardProduct {
+  display: flex;
+  flex-direction: column;
+  background-color:white;
+  width: 279.6px;
+  height: 358.7px;
+  margin: 20px;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  text-align: center;
+}
+
+.cardProduct img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.cardProduct button {
+  background-color: #31C28D;
+  border: none;
+  width: 244.656px;
+  height: 38.63px;
+  margin-top: 10px;
+  cursor: pointer;
+}

@@ -1,26 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import styles from './CardProduct.module.css';
 
 export default class CardProduct extends React.Component {
   render() {
     const { listProduct, getPropsOfChildrens } = this.props;
     return (
-      <div className="cardProduct">
-        <p>{listProduct.title}</p>
+      <div className={ styles.cardProduct }>
         <img
           src={ listProduct.thumbnail }
           alt={ listProduct.id }
         />
+        <p>{listProduct.title}</p>
         {listProduct.shipping.free_shipping
         && <p data-testid="free-shipping"><strong>FRETE GRATIS</strong></p>}
         <p>{`preço: R$ ${listProduct.price}`}</p>
-        <Link
-          data-testid="product-detail-link"
-          to={ `/productDetails/${listProduct.id}` }
-        >
-          Detalhes do produto
-        </Link>
         <button
           className="buttonAddCart"
           data-testid="product-add-to-cart"
