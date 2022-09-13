@@ -92,3 +92,16 @@
   color: #94979D;
   text-align: center;
 }
+
+.carrinho {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.numeroCarrinho {
+  position: absolute;
+  top: 32px;
+  right: 38px;
+}

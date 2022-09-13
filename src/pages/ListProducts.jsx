@@ -8,6 +8,7 @@ import QuantOfProductsCart from '../components/QuantOfProductsCart';
 import styles from './ListProduct.module.css';
 import Lupa from '../assets/Vector.png';
 import Logo from '../assets/logo.png';
+import Carrinho from '../assets/carrinho.png';
 
 export default class ListProducts extends Component {
   constructor() {
@@ -82,17 +83,18 @@ export default class ListProducts extends Component {
             <img src={ Logo } alt="logo front end online store" />
           </div>
           <button
-            className="buttonCarrinho"
+            className={ styles.carrinho }
             data-testid="shopping-cart-button"
             type="button"
             onClick={ () => this.redirectShoppingCart() }
           >
-            Carrinho de compras
-            <QuantOfProductsCart
-              data-testid="shopping-cart-size"
-              quantidade2={ quantidade2 }
-              quantidade={ listItemsAdd }
-            />
+            <img src={ Carrinho } alt="carrinho de compras" />
+            <div className={ styles.numeroCarrinho }>
+              <QuantOfProductsCart
+                quantidade2={ quantidade2 }
+                quantidade={ listItemsAdd }
+              />
+            </div>
           </button>
         </header>
         <div className={ styles.sectionMain }>

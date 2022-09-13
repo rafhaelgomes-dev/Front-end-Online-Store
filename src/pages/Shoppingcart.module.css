@@ -1,0 +1,66 @@
+.divCarrinho {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.shoppingCart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100vw;
+}
+
+.produtosShoppingCart {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  justify-content: center;
+  background-color: white;
+  text-align: center;
+  padding: 5px;
+}
+
+.CardProductShoppingCart {
+  background-color: #E1E5EB;
+  margin: 10px;
+  width: 200px;
+  height: 300px;
+  padding: 10px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.CardProductShoppingCart img {
+  width: 150px;
+}
+
+.DivbuttonFinalizarCompra {
+  margin-top: 10px;
+}
+
+.checkoutProducts {
+  text-decoration: none;
+  background-color: #036B52;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.Home {
+  background-color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100px;
+  cursor: pointer;
+}
